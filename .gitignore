@@ -4,3 +4,6 @@ target/*
 out/*
 *.iml
 /*.iml
+.classpath
+.project
+bin/*
