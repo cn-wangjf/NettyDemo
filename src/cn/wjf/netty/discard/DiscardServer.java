@@ -35,7 +35,7 @@ public class DiscardServer {
                             ch.pipeline().addLast(new DiscardServerHandler());
                         }
                     })
-                    .option(ChannelOption.SO_BACKLOG, 128)          // (5)
+                    .option(ChannelOption.SO_BACKLOG, 128)          // (5) 传入连接队列的最大长度，如果队列已满，连接将被拒绝
                     .childOption(ChannelOption.SO_KEEPALIVE, true); // (6)
 
             // Bind and start to accept incoming connections.
