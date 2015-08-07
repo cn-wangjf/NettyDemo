@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Netty WebSocket</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+	var socket;
+	
+	if(!window.WebSocket) {
+		window.WebSocket = Window.MozWebSocket;
+	}
+	
+	if(window.WebSocket) {
+		socket = new WebSocket("ws://localhost:8800/websocket");
+		socket.onmessage = function(event) {
+			var ta = document.getElementById('responseText');
+			ta.value = event.data;
+		};
+		
+		socket.onopen = function(event) {
+			var ta = document.getElementById('responseText');
+			ta.value = "打开WebSocket正常"
+		};
+		
+		socket.onclose = function(event) {
+			var ta = document.getElementById('responseText');
+			ta.value = "WebSocket 关闭";
+		} 
+	} else {
+		alert("WebSocket 连接没有建立成功");
+	}
+	
+	function send(message) {
+		if(!window.WebSocket) {
+			alert("WebSocket 连接没有建立成功");
+		}
+		if(socket.readyState = WebSocket.OPEN) {
+			socket.send(message);
+		} else {
+			alert("WebSocket 连接没有建立成功");
+		}
+
+	}
+
+</script>
+
+<form onsubmit="return false;">
+<input type="button" value="发送" onclick="send('')" >
+<textarea id="responseText"></textarea>
+</form>
+
+</body>
+</html>
